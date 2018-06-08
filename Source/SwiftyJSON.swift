@@ -95,6 +95,7 @@ public enum Type: Int {
 
 // MARK: - JSON Base
 
+@dynamicMemberLookup
 public struct JSON {
 
 	/**
@@ -1560,4 +1561,19 @@ extension JSON: Codable {
             break
         }
     }
+}
+
+// MARK: - Dynamic Member Lookup
+
+extension JSON {
+    
+    subscript(dynamicMember member: String) -> JSON {
+        get {
+            return self[member]
+        }
+        mutating set {
+            self[member] = newValue
+        }
+    }
+    
 }
